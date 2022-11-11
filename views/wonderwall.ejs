@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src='/assets/js/posts.js' type='text/javascript'></script>
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <div id="header">
+            <h2>WonderWall</h2>
+            
+            <span> Welcome, <%= user_data.first_name %>!</span><br>      
+            <span> <a href="/logout">Logout</a></span>      
+        </div>
+    
+        <div id="message_form">
+            <h2>Post a message</h2>
+            <form id="add_message" action="/add_message" method="post">
+                <textarea name="message" rows="4" cols="50"></textarea><br>
+                <input type="submit" value="Post a message">
+            </form>
+        </div>
+
+        <ul id="main_wall">
+            <% for (let ctr = 0; ctr < messages.length; ctr++) { %>
+                <li class="message_<%= messages[ctr].id %>">
+                    <span><%= messages[ctr].name %> - <%= moment(messages[ctr].message_created_at).format('MMMM, D, YYYY') %></span><br>
+                    <p>
+                        <%= messages[ctr].message %>
+                        <% if(user_data.id === messages[ctr].user_id){ %>
+                            <span><a href="#" data-attr-message-id="<%= messages[ctr].id %>" class="delete_message">Delete Message</a></span>
+                        <% } %>
+                    </p>
+
+                    <form class="add_comment" action="/add_comment" method="post">
+                        <input type="hidden" name="message_id" value="<%= messages[ctr].id %>">
+                        <textarea name="comment" rows="2" cols="30"></textarea><br>
+                        <input type="submit" value="Post a comment">
+                    </form>
+                    <ul class="message_<%= messages[ctr].id %>_comments">
+                        <% if(messages[ctr].comments){ %>
+                            <% comments = JSON.parse(messages[ctr].comments) %>
+                            <% for (let ctr2 = 0; ctr2 < comments.length; ctr2++) { %>
+                                <li class="comment_<%= comments[ctr2].comment_id %>">
+                                    <span><%= comments[ctr2].commenter %> - <%= moment(comments[ctr2].comment_created_at).format('MMMM, D, YYYY') %></span>
+                                    <p>
+                                        <%= comments[ctr2].comment %>
+                                        <% if(user_data.id === comments[ctr2].user_id){ %>
+                                            <span><a href="#" data-attr-comment-id="<%= comments[ctr2].comment_id %>" class="delete_comment">Delete Comment</a></span>
+                                        <% } %>
+                                    </p>
+                                </li>
+                            <% } %>
+                        <% } %>
+                    </ul>
+                </li>
+            <% } %>
+        </ul>
+    </div>
+    
+</body>
+</html>

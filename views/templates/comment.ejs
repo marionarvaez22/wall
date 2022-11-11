@@ -1,0 +1,9 @@
+<li class="comment_<%= comment.comment_id %>">
+    <span><%= comment.commenter %> - <%= moment(comment.comment_created_at).format('MMMM, D, YYYY') %></span>
+    <p>
+        <%= comment.comment %>
+        <% if(user_data.id === comment.user_id){ %>
+            <span><a href="#" data-attr-comment-id="<%= comment.comment_id %>" class="delete_comment">Delete Comment</a></span>
+        <% } %>
+    </p>
+</li>

@@ -1,0 +1,17 @@
+<li class="message_<%= message.id %>">
+    <span><%= message.name %> - <%= moment(message.message_created_at).format('MMMM, D, YYYY') %></span><br>
+    <p>
+        <%= message.message %>
+        <% if(user_data.id === message.user_id){ %>
+            <span><a href="#" data-attr-message-id="<%= message.id %>" class="delete_message">Delete Message</a></span>
+        <% } %>
+    </p>
+
+    <form class="add_comment" action="/add_comment" method="post">
+        <input type="hidden" name="message_id" value="<%= message.id %>">
+        <textarea name="comment" rows="2" cols="30"></textarea><br>
+        <input type="submit" value="Post a comment">
+    </form>
+    <ul class="message_<%= message.id %>_comments">
+    </ul>
+</li>

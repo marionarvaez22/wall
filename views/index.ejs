@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+    <script src='/assets/js/index.js' type='text/javascript'></script>
+    <link rel="stylesheet" href="/assets/css/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div id="wrapper">
+        <h2>WonderWall</h2>
+    
+        <p>Already have an account?</p>
+        <p>Login</p>
+        <form id="login" action="/login" method="post">
+            <input type="email" name="email_address" placeholder="Email Address">
+            <input type="password" name="password" placeholder="Password">
+            <input type="submit">
+        </form>
+    
+        <p>New Here?</p>
+        <p>Register</p>
+        <form id="register" action="/process_registration" method="post">
+            <input type="text" name="first_name" placeholder="First Name">
+            <input type="text" name="last_name" placeholder="Last Name">
+            <input type="email" name="email_address" placeholder="Email Address">
+            <input type="password" name="password" placeholder="Password">
+            <input type="password" name="confirm_password" placeholder="Confirm Password">
+            <input type="submit">
+        </form> 
+    </div>
+</body>
+</html>
